@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.checkAuth().subscribe((isAuthenticated) => console.log('app authenticated', isAuthenticated));
+    this.authService.checkAuth().subscribe();
   }
   
 }

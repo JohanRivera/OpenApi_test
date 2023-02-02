@@ -1,0 +1,33 @@
+<body>
+    <div class="wrapper fadeInDown bg-Login">
+      <div id="formContent">
+        <!-- Icon -->
+        <div class="fadeIn first">
+          <img class="logoEntidad" src="../../../../assets/img/logo.png" id="icon" alt="User Icon" />
+          <hr />
+        </div>
+  
+        <!-- Login Form -->
+        <form #formRegister="ngForm" (ngSubmit)="onSubmit(formRegister)" novalidate autocomplete="off">
+          <div class="wrap-input100 m-b-16">
+            <input class="input100" type="text" name="userName" [(ngModel)]="user.userName" placeholder="Email"
+              autofocus>
+            <span class="focus-input100"></span>
+          </div>
+  
+          <div class="wrap-input100 m-b-16">
+            <input class="input100" [type]="fieldTextType ? 'text' : 'password'" name="password" 
+            [(ngModel)]="user.password" placeholder="Contraseña">
+          </div>
+          <input type="submit" class="fadeIn fourth btn-mob-width" value="Registrarse">
+  
+          <div class="container">
+            <li [routerLinkActive]="['link-active']">
+              <a class="underlineHover" (click)="login()">¿Ya tiene un usuario?</a>
+            </li><br>
+          </div>
+  
+        </form>  
+      </div>
+    </div>
+</body>

@@ -1,1 +1,52 @@
-<p>header works!</p>
+<div class="wrapper">
+
+    <nav id="sidebar" class="containerMenu">
+      <img src="../../../assets/img/logo_removebg.png" id="icon" alt="User Icon" />
+      <hr>
+    </nav>
+  
+    <!-- Page Content Holder -->
+    <div id="content">
+  
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+  
+          <button type="button" id="sidebarCollapse" class="navbar-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" style="display: none;"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+          </button>
+          
+          <img class="headerImg" src="../../../assets/img/logo_negro.png" alt="">
+  
+          <div class="dropdown">
+  
+            <div class="container">
+              <li class="nav-item dropdown">
+                <button class="btn btn-secondary" type="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  </svg> {{ userName }}!
+                </button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" (click)="logout()">Cerrar sesión</a>
+  
+                </div>
+              </li>
+            </div>
+          </div>
+  
+        </div>
+      </nav>
+  
+      <router-outlet></router-outlet>
+  
+    </div>
+  </div>
+  

@@ -26,9 +26,9 @@ export class CrudComponent implements OnInit {
       return false;
     }));
 
-    this.secretData$ = this.httpClient
-      .get('https://localhost:44360/WeatherForecast')
-      .pipe(catchError((error) => of(error)));
+    // this.secretData$ = this.httpClient
+    //   .get('https://localhost:44360/WeatherForecast')
+    //   .pipe(catchError((error) => of(error)));
   }
 
   login() {

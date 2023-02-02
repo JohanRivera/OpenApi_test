@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor 
 {
-  private secureRoutes = ['https://localhost:5001/api'];
+  private secureRoutes = ['https://localhost:44360'];
 
   constructor(private authService: AuthService) {}
 

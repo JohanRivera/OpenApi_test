@@ -38,6 +38,7 @@ public static class Config
     public static IEnumerable<Client> Clients(IConfigurationSection stsConfig)
     {
         var clientUrl = stsConfig["ClientUrl"];
+
         return new Client[]
             {
                 new Client
@@ -54,7 +55,7 @@ public static class Config
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        $"{clientUrl}/unauthorized",
+                        $"{clientUrl}/login",
                         clientUrl
                     },
                     AllowedCorsOrigins = new List<string>

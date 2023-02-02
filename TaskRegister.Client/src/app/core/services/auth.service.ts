@@ -30,6 +30,6 @@ export class AuthService {
   }
 
   signOut() {
-    this.oidcSecurityService.logoff();
+    this.oidcSecurityService.logoff().subscribe();
   }
 }

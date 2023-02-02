@@ -5,6 +5,7 @@ import { AuthModule } from 'angular-auth-oidc-client';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptors';
+import { LayoutModule } from './layouts/layout.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptors';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    LayoutModule,
     AuthModule.forRoot({
       config: {
         authority: 'https://localhost:5001',

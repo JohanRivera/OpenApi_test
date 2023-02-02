@@ -1,11 +1,24 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CrudComponent } from "./modules/task-register/crud/crud.component";
+import { AuthGuard } from "./core/guards/auth.guard";
+import { LayoutAuthComponent } from "./layouts/layout-auth/layout-auth.component";
+import { LayoutComponent } from "./layouts/layout/layout.component";
 
 const routes: Routes = [
     {
+        path: "login",
+        component: LayoutAuthComponent,
+        children: [
+            {
+                path: "",
+                loadChildren: () => import("./modules/auth/authentication.module").then((m) => m.AuthenticationModule)
+            }
+        ]
+    },
+    {
         path: "",
-        component: CrudComponent,
+        canActivate: [AuthGuard],
+        component: LayoutComponent,
         children: [
             {
                 path: "",
