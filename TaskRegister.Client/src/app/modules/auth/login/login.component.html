@@ -10,14 +10,32 @@
         <!-- Login Form -->
         <form #formRegister="ngForm" (ngSubmit)="onSubmit(formRegister)" novalidate autocomplete="off">
           <div class="wrap-input100 m-b-16">
+            <input class="input100" type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="Nombre"
+              [class.is-invalid]="firstName.invalid && firstName.touched" #firstName="ngModel" autofocus required minlength="3">
+            <small *ngIf="firstName.invalid && firstName.touched" class="form-text text-danger"> Campo requerido.</small>
+            <small *ngIf="firstName.hasError('minlength')" class="form-text text-danger"> El mínimo de dígitos permitidos es 3.</small>
+          </div>
+
+          <div class="wrap-input100 m-b-16">
+            <input class="input100" type="text" name="lastName" [(ngModel)]="user.lastName" placeholder="Apellido"
+              [class.is-invalid]="lastName.invalid && lastName.touched" #lastName="ngModel" autofocus required minlength="3">
+            <small *ngIf="lastName.invalid && lastName.touched" class="form-text text-danger"> Campo requerido.</small>
+            <small *ngIf="lastName.hasError('minlength')" class="form-text text-danger"> El mínimo de dígitos permitidos es 3.</small>
+          </div>
+
+          <div class="wrap-input100 m-b-16">
             <input class="input100" type="text" name="userName" [(ngModel)]="user.userName" placeholder="Usuario"
-              autofocus>
-            <span class="focus-input100"></span>
+              [class.is-invalid]="userName.invalid && userName.touched" #userName="ngModel" autofocus required minlength="7">
+            <small *ngIf="userName.invalid && userName.touched" class="form-text text-danger"> Campo requerido.</small>
+            <small *ngIf="userName.hasError('minlength')" class="form-text text-danger"> El mínimo de dígitos permitidos es 7.</small>
           </div>
   
           <div class="wrap-input100 m-b-16">
-            <input class="input100" [type]="fieldTextType ? 'text' : 'password'" name="password" 
-            [(ngModel)]="user.password" placeholder="Contraseña">
+            <input class="input100" [type]="fieldTextType ? 'text' : 'password'" name="password" [(ngModel)]="user.password" 
+              placeholder="Contraseña" [class.is-invalid]="password.invalid && password.touched" #password="ngModel"
+              required required minlength="7">
+            <small *ngIf="password.invalid && password.touched" class="form-text text-danger"> Campo requerido.</small>
+            <small *ngIf="password.hasError('minlength')" class="form-text text-danger"> El mínimo de dígitos permitidos es 7.</small>
           </div>
           <input type="submit" class="fadeIn fourth btn-mob-width" value="Registrarse">
   

@@ -15,16 +15,17 @@ export class AuthInterceptor implements HttpInterceptor
         return next.handle(request);
     }
 
-    const token = this.authService.token;
-
-    if (!token) {
+    this.authService.token.subscribe(token => {
+      if (!token)
         return next.handle(request);
-    }
-
-    request = request.clone({
+        
+      request = request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + token),
-    });
+      });
 
+      return next.handle(request);
+    });
+    
     return next.handle(request);
   }
 }
