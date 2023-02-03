@@ -10,9 +10,8 @@
 <div class="nav-page">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-        <a href="~/" class="navbar-brand">
-            <img src="~/duende-logo.svg" class="icon-banner">
-            Duende IdentityServer
+        <a class="navbar-brand">
+            Portal Servidor de Identidad
         </a>
 
         @if (!string.IsNullOrWhiteSpace(name))
@@ -22,7 +21,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@name <b class="caret"></b></a>
                     
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" asp-page="/Account/Logout/Index">Logout</a>
+                        <a class="dropdown-item" asp-page="/Account/Logout/Index">Cerrar sesión</a>
                     </div>
               </li>
             </ul>

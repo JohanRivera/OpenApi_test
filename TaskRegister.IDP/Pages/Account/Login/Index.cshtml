@@ -3,8 +3,8 @@
 
 <div class="login-page">
     <div class="lead">
-        <h1>Login</h1>
-        <p>Choose how to login</p>
+        <h1>Inicio de sesión</h1>
+        <p></p>
     </div>
 
     <partial name="_ValidationSummary" />
@@ -16,7 +16,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Local Account</h2>
+                        <h2>Cuenta local</h2>
                     </div>
 
                     <div class="card-body">
@@ -24,12 +24,12 @@
                             <input type="hidden" asp-for="Input.ReturnUrl" />
 
                             <div class="form-group">
-                                <label asp-for="Input.Username"></label>
-                                <input class="form-control" placeholder="Username" asp-for="Input.Username" autofocus>
+                                <label asp-for="Input.Username">Usuario</label>
+                                <input class="form-control" placeholder="Usuario" asp-for="Input.Username" autofocus>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Input.Password"></label>
-                                <input type="password" class="form-control" placeholder="Password" asp-for="Input.Password" autocomplete="off">
+                                <label asp-for="Input.Password">Contraseña</label>
+                                <input type="password" class="form-control" placeholder="Contraseña" asp-for="Input.Password" autocomplete="off">
                             </div>
                             
                             @if (Model.View.AllowRememberLogin)
@@ -38,14 +38,14 @@
                                     <div class="form-check">
                                         <input class="form-check-input" asp-for="Input.RememberLogin">
                                         <label class="form-check-label" asp-for="Input.RememberLogin">
-                                            Remember My Login
+                                            Recordarme
                                         </label>
                                     </div>
                                 </div>
                             }
                             
-                            <button class="btn btn-primary" name="Input.Button" value="login">Login</button>
-                            <button class="btn btn-secondary" name="Input.Button" value="cancel">Cancel</button>
+                            <button class="btn btn-primary" name="Input.Button" value="login">Ingresar</button>
+                            <button class="btn btn-secondary" name="Input.Button" value="cancel">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -81,8 +81,8 @@
         @if (!Model.View.EnableLocalLogin && !Model.View.VisibleExternalProviders.Any())
         {
             <div class="alert alert-warning">
-                <strong>Invalid login request</strong>
-                There are no login schemes configured for this request.
+                <strong>Solicitud de inicio de sesión no válida</strong>
+                No hay esquemas de inicio de sesión configurados para esta solicitud.
             </div>
         }
     </div>

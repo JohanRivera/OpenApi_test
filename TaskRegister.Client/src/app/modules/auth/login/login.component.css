@@ -5,7 +5,7 @@ html {
   }
   
   a {
-    color: #92badd;
+    color: #2c0649;
     display: inline-block;
     text-decoration: none;
     font-weight: 400;
@@ -80,7 +80,7 @@ html {
   input[type=button],
   input[type=submit],
   input[type=reset] {
-    background-color: #be061b;
+    background-color: #535b64;
     border: none;
     color: white;
     padding: 12px 152px;
@@ -105,7 +105,7 @@ html {
   input[type=button]:hover,
   input[type=submit]:hover,
   input[type=reset]:hover {
-    background-color: #e11019;
+    background-color: #343A40;
   }
   
   input[type=button]:active,
@@ -144,7 +144,7 @@ html {
   input[type=text]:focus,
   [type=password]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #e11019;
+    border-bottom: 2px solid #343A40;
   }
   
   input[type=text]:placeholder {
@@ -268,13 +268,13 @@ html {
     bottom: -10px;
     width: 0;
     height: 2px;
-    background-color: #e11019;
+    background-color: #0088ff;
     content: "";
     transition: width 0.2s;
   }
   
   .underlineHover:hover {
-    color: #e11019;
+    color: #0088ff;
   }
   
   .underlineHover:hover:after {

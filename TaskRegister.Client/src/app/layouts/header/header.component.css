@@ -12,7 +12,7 @@ a:focus {
 
 .navbar {
   padding: 15px 10px;
-  background: #e11019;
+  background: #343A40;
   border: none;
   border-radius: 0;
   margin-bottom: 40px;
@@ -133,13 +133,13 @@ ul.CTAs a {
   height: 2px;
   margin: 0 auto;
   display: block;
-  background: #e11019;
+  background: #343A40;
   transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
   transition-delay: 0.2s;
 }
 
 #sidebarCollapse:hover {
-  background: #be061b;
+  background: #fff;
 }
 
 #sidebarCollapse span:first-of-type {
@@ -267,22 +267,22 @@ ul.ul-list {
 
 .dropdown .btn {
   background: #d1d1d1;
-  color: #e11019;
+  color: #58595b;
 }
 
 .dropdown .btn:hover {
   background: #e1e1e1; /* rgb(0, 68, 141); */
-  color: #e11019;
+  color: #58595b;
 }
 
 .dropdown .btn:active {
   background: #e1e1e1; /* rgb(0, 68, 141); */
-  color: #e11019;
+  color: #58595b;
 }
 
 .dropdown .btn:focus {
   background: #e1e1e1; /* rgb(0, 68, 141); */
-  color: #e11019;
+  color: #58595b;
 }
 
 .dropdown-menu .dropdown-item {
@@ -292,13 +292,13 @@ ul.ul-list {
 }
 
 .container .dropdown .dropdown-menu a:hover {
-  color: #e11019;
+  color: #58595b;
   background-color: #e1e1e1; /* rgb(0, 68, 141); */
   border-color: #fff;
 }
 
 .nav-color {
-  background-color: #e11019;
+  background-color: #58595b;
 }
 
 .dropdown-menu {
@@ -350,13 +350,12 @@ ul.ul-list {
 }
 
 #icon {
-  width: 60%;
+  width: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
 .headerImg{
-  
-  width: 10%;
+  width: 12%;
 }

@@ -3,14 +3,14 @@
       <div id="formContent">
         <!-- Icon -->
         <div class="fadeIn first">
-          <img class="logoEntidad" src="../../../../assets/img/logo.png" id="icon" alt="User Icon" />
+          <img class="logoEntidad" src="../../../../assets/img/new_logo_login.png" id="icon" alt="User Icon" />
           <hr />
         </div>
   
         <!-- Login Form -->
         <form #formRegister="ngForm" (ngSubmit)="onSubmit(formRegister)" novalidate autocomplete="off">
           <div class="wrap-input100 m-b-16">
-            <input class="input100" type="text" name="userName" [(ngModel)]="user.userName" placeholder="Email"
+            <input class="input100" type="text" name="userName" [(ngModel)]="user.userName" placeholder="Usuario"
               autofocus>
             <span class="focus-input100"></span>
           </div>
@@ -23,7 +23,7 @@
   
           <div class="container">
             <li [routerLinkActive]="['link-active']">
-              <a class="underlineHover" (click)="login()">¿Ya tiene un usuario?</a>
+              <a class="underlineHover" (click)="login()">¿Iniciar sesión con usuario existente?</a>
             </li><br>
           </div>
   
