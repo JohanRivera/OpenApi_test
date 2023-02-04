@@ -1,52 +1,97 @@
 using IdentityServer4.AccessTokenValidation;
+using Microsoft.EntityFrameworkCore;
+using TaskRegister.API.DbContexts;
+using TaskRegister.API.Services.ProjectsService;
+using TaskRegister.API.Services.TaskRegister;
 
-var builder = WebApplication.CreateBuilder(args);
+try
+{
 
-// Add services to the container.
+    var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+    // Add services to the container.
 
-builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-    .AddIdentityServerAuthentication(options =>
+    #region Definición de scopes
+
+    builder.Services.AddScoped<IProjectsService, ProjectsService>();
+    builder.Services.AddScoped<ITaskRegisterService, TaskRegisterService>();
+
+    #endregion
+
+    builder.Services.AddControllers();
+
+    #region Cadena conexión SQLite
+
+    builder.Services.AddDbContext<TaskRegisterContext>(options =>
     {
-        //Configuration Security Token Server (STS)
-        options.Authority = "https://localhost:5001";
-        options.ApiName = "taskregisterapi";
-        options.ApiSecret = "taskRegisterApiSecret";
+        options.UseSqlite(builder.Configuration.GetConnectionString("SqliteDb"));
     });
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAllOrigins",
-        builder =>
+    #endregion
+
+    #region Configuración OpenApi
+
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    #endregion
+
+    #region Configuración Autenticación
+
+    builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+        .AddIdentityServerAuthentication(options =>
         {
-            builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+            //Configuration Security Token Server (STS)
+            options.Authority = "https://localhost:5001";
+            options.ApiName = "taskregisterapi";
+            options.ApiSecret = "taskRegisterApiSecret";
         });
-});
 
-var app = builder.Build();
+    #endregion
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+    #region Configuración cors
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowOrigins",
+            builder =>
+            {
+                builder
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+    });
+
+    #endregion
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseCors("AllowOrigins");
+
+    app.UseAuthentication(); // Para habilitar la autenticación configurada
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.Run();
+
+}catch(Exception ex) when (ex.GetType().Name is not "StopTheHostException")
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    Console.Write(ex.Message);
 }
-
-app.UseHttpsRedirection();
-
-app.UseCors("AllowAllOrigins");
-
-app.UseAuthentication(); // Para habilitar la autenticación configurada
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+finally
+{
+    Console.Write("Fin");
+}

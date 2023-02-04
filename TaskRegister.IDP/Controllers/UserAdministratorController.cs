@@ -6,6 +6,7 @@ using TaskRegister.IDP.Services;
 namespace TaskRegister.IDP.Controllers
 {
     [Route("[controller]")]
+    [ApiController]
     public class UserAdministratorController : ControllerBase
     {
         private readonly ILocalUserService _localUserService;

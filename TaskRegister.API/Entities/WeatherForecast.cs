@@ -1,4 +1,4 @@
-namespace TaskRegister.API
+namespace TaskRegister.API.Entities
 {
     public class WeatherForecast
     {

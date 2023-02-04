@@ -145,7 +145,7 @@ namespace TaskRegister.IDP.Services
             catch(Exception ex)
             {
                 Console.Write(ex.Message);
-                return new CustomResponse<bool> { IsSuccessful = false, Message = "Creación de usuario fallido.", Content = false };
+                return ResponseCustom(false, false, "Creación de usuario fallido.");
             }
             
         }
