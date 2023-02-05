@@ -11,7 +11,7 @@ namespace TaskRegister.API.Entities.TaskRegister
         public string Subject { get; set; }
 
         [Required]
-        public Guid UserId { get; set; }
+        public string SubjectUserId { get; set; }
 
         [Required]
         public Guid ProjectId { get; set; }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskRegister.API.DbContexts;
 
@@ -10,9 +11,11 @@ using TaskRegister.API.DbContexts;
 namespace TaskRegister.API.Migrations
 {
     [DbContext(typeof(TaskRegisterContext))]
-    partial class TaskRegisterContextModelSnapshot : ModelSnapshot
+    [Migration("20230204224421_FourMigrationTaskMigration")]
+    partial class FourMigrationTaskMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");

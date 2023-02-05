@@ -1,7 +1,9 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AuthModule } from 'angular-auth-oidc-client';
+import { environment } from 'src/environments/environment.prod';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptors';
@@ -17,7 +19,7 @@ import { LayoutModule } from './layouts/layout.module';
     LayoutModule,
     AuthModule.forRoot({
       config: {
-        authority: 'https://localhost:5001',
+        authority: environment.urlIdp.endsWith('/') ? `${environment.urlIdp.substring(0, environment.urlIdp.length - 1)}` : `${environment.urlIdp}`,
         redirectUrl: window.location.origin,
         postLogoutRedirectUri: window.location.origin,
         clientId: 'angularClientForTaskRegisterApi',
@@ -26,6 +28,13 @@ import { LayoutModule } from './layouts/layout.module';
         silentRenew: true,
         useRefreshToken: true
       },
+    }),
+    NgxDatatableModule.forRoot({
+      messages: {
+        emptyMessage: 'Sin registros para mostrar', // Message to show when array is presented, but contains no values
+        totalMessage: 'registros existentes', // Footer total message
+        selectedMessage: 'registro seleccionado' // Footer selected message
+      }
     }),
     HttpClientModule
   ],

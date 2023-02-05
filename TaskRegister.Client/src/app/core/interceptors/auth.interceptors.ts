@@ -1,11 +1,12 @@
 import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor 
 {
-  private secureRoutes = ['https://localhost:44360'];
+  private secureRoutes = [`${environment.urlApi}`];
 
   constructor(private authService: AuthService) {}
 

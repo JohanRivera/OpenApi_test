@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TaskRegister.API.Entities.Projects;
 using TaskRegister.API.Entities.TaskRegister;
-using TaskRegister.API.Services.ProjectsService;
 using TaskRegister.API.Services.TaskRegister;
 
 namespace TaskRegister.API.Controllers.TaskRegister
@@ -46,7 +44,7 @@ namespace TaskRegister.API.Controllers.TaskRegister
 
         // Obtener lista de los registros de la tarea
         [HttpPost("DeleteTimeslip")]
-        public async Task<IActionResult> DeleteTimeslip(DeleteTimeslipDto data)
+        public async Task<IActionResult> DeleteTimeslip([FromForm] DeleteTimeslipDto data)
         {
             var response = await _taskRegisterService.DeleteTimeslip(data);
             return StatusCode(response.StatusCode, response);

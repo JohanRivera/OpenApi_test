@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UserRegister } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -16,8 +15,7 @@ export class LoginComponent implements OnInit{
   public user: UserRegister = { userName: '', password: '', firstName: '', lastName: ''};
   public fieldTextType: boolean = false;
 
-  constructor(private authService: AuthService, 
-    private router: Router,
+  constructor(private authService: AuthService,
     private userService: UserService) {}
 
   ngOnInit(): void {}

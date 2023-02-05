@@ -1,25 +1,158 @@
-<div>Welcome to home Route</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <h4>Gestor de tareas</h4>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-light" (click)="downloadReport()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+          <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+        </svg>
+        Descargar consulta
+      </button>
+    </div>
+  </div>
+  <hr>
 
-<div *ngIf="isAuthenticated$ | async as isAuthenticated; else noAuth">
-  <button (click)="logout()">Logout</button>
-  <hr />
+  <form #formGlobal="ngForm" id="formGlobal">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"><strong>Agregar tarea para el dia</strong> </label>
+      <div class="col-sm-2">
+        <input class="form-control" type="date" name="filterDateGlobal"/> 
+      </div>
+    </div>
+    <hr>
 
-  <br />
+    <div class="form-class row">
+      <div class="col-sm-1">
+        <button type="button" class="btn btn-outline-success btn-cursor">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+          </svg>
+          <span class="tooltiptext">Agregar proyecto</span>
+        </button>
+      </div>
+      <div class="col-sm-3">
+        <ng-multiselect-dropdown [placeholder]="'Seleccionar proyecto'" [settings]="dropdownSettings" [data]="project"
+          [(ngModel)]="selectProject" (onSelect)="onItemSelect()" (onDeSelect)="onDeselect()" [ngModelOptions]="{standalone: true}">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="taskDescription" placeholder="Tarea a ejecutar">
+      </div>
+      <div class="input-group col-sm-2">
+        <input type="text" class="form-control" placeholder="0.00">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="timeSpan">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+            </svg>
+            <span class="tooltiptext">Al adicionar tiempo manualmente, se deshabilita la opción de temporizador. <br> Si desea cronometrizar la actividad no ingrese tiempo</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <br>
 
-  Is Authenticated: {{ isAuthenticated }}
+    <div class="form-class row">
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="taskDescription" placeholder="Comentarios o descripción (opcional)">
+      </div>
 
-  <br />
-  userData
-  <pre>{{ userData$ | async | json }}</pre>
+      <div class="col-sm-4">
+        <button type="button" class="btn btn-outline-success btn-cursor" id="btnInit" *ngIf="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+          </svg>
+          Iniciar tiempo
+        </button>
 
-  <br />
+        <div class="btn-group center" style="padding-left: 150px;" *ngIf="true">
+          <button type="button" class="btn btn-outline-secondary btn-cursor" style="border-style: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pause-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5zm3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5z"/>
+            </svg>
+            <span class="tooltiptext">Pausar tiempo</span>
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-cursor" style="border-style: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-stop-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z"/>
+            </svg>
+            <span class="tooltiptext">Finalizar</span>
+          </button>
+        </div>
+        
+      </div>
+    </div>
+  </form>
+
+  <div class="dt-container">
+    <ngx-datatable
+      #tableTimelips
+      class="material expandable"
+      [rows]="tasksRegister"
+      [groupRowsBy]="'assignedDate'"
+      [columnMode]="ColumnMode.force"
+      [scrollbarH]="true"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="60"
+      [limit]="7"
+      [groupExpansionDefault]="true"
+    >
+      <!-- Group Header Template -->
+      <ngx-datatable-group-header [rowHeight]="50" #myGroupHeader>
+        <ng-template let-group="group" let-expanded="expanded" ngx-datatable-group-header-template>
+          <div style="padding-left:5px;">
+            <h5
+              href="#"
+              [class.datatable-icon-right]="!expanded"
+              [class.datatable-icon-down]="expanded"
+              title="Expand/Collapse Group"
+              (click)="toggleExpandGroup(group)"
+            >
+              <b>{{ group.value[0].assignedDate }}</b>
+          </h5>
+          </div>
+        </ng-template>
+      </ngx-datatable-group-header>
+      
+      <!-- Row Column Template -->
+      <ngx-datatable-column name="Responsable" prop="assignedTo" editable="false" frozenLeft="True" [maxWidth]="210"></ngx-datatable-column>
+
+      <ngx-datatable-column name="Proyecto" prop="projectName" editable="false" frozenLeft="True" [maxWidth]="400"></ngx-datatable-column>
+
+      <ngx-datatable-column name="Tarea" prop="taskDescription" editable="false" [maxWidth]="400"></ngx-datatable-column>
+
+      <ngx-datatable-column name="Tiempo" prop="time" [maxWidth]="100"></ngx-datatable-column>
+
+      <ngx-datatable-column name="Acciones" prop="" [maxWidth]="165">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="value"
+          let-row="row"
+          let-group="group"
+          let-rowHeight="rowHeight"
+        >
+          <button class="btn btn-outline-primary btn-cursor" data-toggle="modal" data-target="#DetailsCases"
+            style="border-style: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+            <span class="tooltiptext">Editar</span>
+          </button>
+          <button class="btn btn-outline-danger btn-cursor" data-toggle="modal" data-target="#DetailsCases"
+            style="border-style: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+              <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+            </svg>
+            <span class="tooltiptext">Eliminar</span>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
 </div>
-
-<ng-template #noAuth>
-  <button (click)="login()">Login</button>
-  <hr />
-</ng-template>
-
-<pre>
-  {{ secretData$ | async | json }}
-</pre>

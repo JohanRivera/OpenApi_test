@@ -1,0 +1,58 @@
+.btn.btn-cursor .tooltiptext {
+    visibility: hidden;
+    width: max-content;
+    background-color: rgb(71, 71, 71);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px 5px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    transform: translate(15%, -10%);
+    z-index: 1;
+  }
+  
+  .btn.btn-cursor:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  #formGlobal{
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+  }
+
+  #timeSpan {
+    border-color: #dadee3;
+  }
+
+  #timeSpan .tooltiptext{
+    visibility: hidden;
+    width: max-content;
+    background-color: rgb(71, 71, 71);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px 5px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    transform: translate(-115%, -10%);
+    z-index: 1;
+  }
+
+  #timeSpan:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  #btnInit {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: none;
+  }
+
+  .dt-container {
+    margin-top: 4%;
+  }

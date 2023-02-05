@@ -19,11 +19,14 @@ export class HeaderComponent implements OnInit {
       $('#sidebar').toggleClass('active');
       $(this).toggleClass('active');
     });
+    $('#sidebarCollapse').click();
     this.getNameUserLogIn()
   }
 
   getNameUserLogIn() {
-    this.userName = 'Prueba'//this.authService.getLoggedInUser();
+    this.authService.userData.subscribe(response => {
+      this.userName = response.userData["given_name"]
+    });
   }
 
   logout() 

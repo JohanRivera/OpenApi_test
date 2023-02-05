@@ -19,7 +19,7 @@ namespace TaskRegister.IDP.Controllers
         }
 
         [HttpPost("CreateUserIdp")]
-        public async Task<IActionResult> CreateUserIdp(CreateUser createUser)
+        public async Task<IActionResult> CreateUserIdp([FromBody] CreateUser createUser)
         {
             CustomResponse<bool> response = await _localUserService.AddUser(createUser);
             return StatusCode(response.StatusCode, response);

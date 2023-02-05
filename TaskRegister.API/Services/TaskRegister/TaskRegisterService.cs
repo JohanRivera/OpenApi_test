@@ -25,13 +25,13 @@ namespace TaskRegister.API.Services.TaskRegister
                 var toAdd = new ProductionTimeSlip
                 {
                     Subject = Guid.NewGuid().ToString(),
-                    UserId = Guid.Parse(data.UserId),
+                    SubjectUserId = data.SubjectUserId,
                     ProjectId = Guid.Parse(data.ProjectId),
                     AssignedTo = data.AssignedTo,
                     TaskDescription = data.TaskDescription,
                     Comment = data.Comment,
                     Time = data.Time,
-                    AssignedDate = data.AssignedDate,
+                    AssignedDate = Convert.ToDateTime(data.AssignedDate),
                     DateLog = DateTime.Now,
                 };
 
@@ -63,13 +63,13 @@ namespace TaskRegister.API.Services.TaskRegister
                     return ResponseCustom(false, false, "Tarea no existe.");
 
                 update.DateLog = DateTime.Now;
-                update.AssignedDate = data.AssignedDate;
+                update.AssignedDate = Convert.ToDateTime(data.AssignedDate);
                 update.ProjectId = Guid.Parse(data.ProjectId);
                 update.TaskDescription = data.TaskDescription;
                 update.Comment = data.Comment;
                 update.Time = data.Time;
                 update.AssignedTo = data.AssignedTo;
-                update.UserId = Guid.Parse(data.UserId);
+                update.SubjectUserId = data.SubjectUserId;
 
                 if (!await SaveChangesAsync())
                     return ResponseCustom(false, false, "Actualización fallida.");
@@ -95,12 +95,12 @@ namespace TaskRegister.API.Services.TaskRegister
                 {
                     var responseAll = from t in _context.ProductionTimeSlips
                                       join p in _context.Projects on t.ProjectId equals p.Id
-                                      where t.UserId == Guid.Parse(data.UserId) &&
+                                      where t.SubjectUserId == data.SubjectUserId &&
                                             t.AssignedDate >= Convert.ToDateTime(data.DateLimitDown) &&
                                             t.AssignedDate <= Convert.ToDateTime(data.DateLimitUp)
                                       select new ReturnTimeslipsDto
                                       {
-                                          UserId = t.UserId.ToString(),
+                                          SubjectUserId = t.SubjectUserId,
                                           Subject = t.Subject,
                                           AssignedDate = Convert.ToDateTime(t.AssignedDate),
                                           AssignedTo = t.AssignedTo,
@@ -111,20 +111,6 @@ namespace TaskRegister.API.Services.TaskRegister
                                           Comment = t.Comment
                                       };
 
-                    /*var response = _context.ProductionTimeSlips
-                        .Where(p => p.UserId == Guid.Parse(data.UserId)
-                                && p.AssignedDate >= Convert.ToDateTime(data.DateLimitDown)
-                                && p.AssignedDate <= Convert.ToDateTime(data.DateLimitUp))
-                        .Select(r => new ReturnTimeslipsDto
-                        {
-                            UserId = r.UserId.ToString(),
-                            Subject = r.Subject,
-                            AssignedDate = Convert.ToDateTime(r.AssignedDate),
-                            AssignedTo = r.AssignedTo,
-                            ProjectId = r.ProjectId.ToString(),
-                            Comment= r.Comment
-                        }).ToList();*/
-
                     if (responseAll == null)
                         return ResponseCustom(new List<ReturnTimeslipsDto>(), true, "Consulta exitosa.");
 
@@ -134,13 +120,13 @@ namespace TaskRegister.API.Services.TaskRegister
                 // Consulta de un proyecto especifico
                 var response = from t in _context.ProductionTimeSlips
                                join p in _context.Projects on t.ProjectId equals p.Id
-                               where t.UserId == Guid.Parse(data.UserId) &&
+                               where t.SubjectUserId == data.SubjectUserId &&
                                      t.AssignedDate >= Convert.ToDateTime(data.DateLimitDown) &&
                                      t.AssignedDate <= Convert.ToDateTime(data.DateLimitUp) &&
                                      t.ProjectId == Guid.Parse(data.ProjectId)
                                select new ReturnTimeslipsDto
                                {
-                                   UserId = t.UserId.ToString(),
+                                   SubjectUserId = t.SubjectUserId.ToString(),
                                    Subject = t.Subject,
                                    AssignedDate = Convert.ToDateTime(t.AssignedDate),
                                    AssignedTo = t.AssignedTo,
