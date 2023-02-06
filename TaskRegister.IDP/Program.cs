@@ -8,7 +8,7 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    builder.Logging.ClearProviders();
+    //builder.Logging.ClearProviders();
     builder.Host.UseNLog();
 
     var app = builder
@@ -20,9 +20,11 @@ try
 // https://github.com/dotnet/runtime/issues/60600
 catch (Exception ex) when (ex.GetType().Name is not "StopTheHostException")
 {
+    Console.Write(ex.Message);
     logger.Error(ex);
 }
 finally
 {
+    Console.Write("Fin");
     LogManager.Shutdown();
 }

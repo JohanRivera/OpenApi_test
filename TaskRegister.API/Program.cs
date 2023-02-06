@@ -1,8 +1,12 @@
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Web;
 using TaskRegister.API.DbContexts;
 using TaskRegister.API.Services.ProjectsService;
 using TaskRegister.API.Services.TaskRegister;
+
+var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
 try
 {
@@ -10,6 +14,7 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
+    builder.Host.UseNLog();
 
     #region Definición de scopes
 
@@ -90,8 +95,10 @@ try
 }catch(Exception ex) when (ex.GetType().Name is not "StopTheHostException")
 {
     Console.Write(ex.Message);
+    logger.Error(ex);
 }
 finally
 {
     Console.Write("Fin");
+    LogManager.Shutdown();
 }
