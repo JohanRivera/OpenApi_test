@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Mz7UyfFq2P8kbujVGSAiOKqglFJswr5BlNMCdd8BMU/rdaOF0kvtiz+FgtHy/Igd3fUaWymYEjSraoVqGGZx0w==",
+  "dgSpecHash": "qptEOygp37urq6U8zYRCFLIu/P0zMdj7tnUZE/KMsv6yYRYqAloTCH4+Avf2VE+7fSSQIY5is7MdxL3ot8kPyg==",
   "success": true,
   "projectFilePath": "D:\\ProjectsIndividuals\\OpenApi_test\\TaskRegister.API\\TaskRegister.API.csproj",
   "expectedPackageFiles": [
@@ -38,6 +38,9 @@
     "C:\\Users\\JLRiveraG\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\JLRiveraG\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\JLRiveraG\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\JLRiveraG\\.nuget\\packages\\nlog\\5.1.1\\nlog.5.1.1.nupkg.sha512",
+    "C:\\Users\\JLRiveraG\\.nuget\\packages\\nlog.extensions.logging\\5.2.1\\nlog.extensions.logging.5.2.1.nupkg.sha512",
+    "C:\\Users\\JLRiveraG\\.nuget\\packages\\nlog.web.aspnetcore\\5.2.1\\nlog.web.aspnetcore.5.2.1.nupkg.sha512",
     "C:\\Users\\JLRiveraG\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.2\\sqlitepclraw.bundle_e_sqlite3.2.1.2.nupkg.sha512",
     "C:\\Users\\JLRiveraG\\.nuget\\packages\\sqlitepclraw.core\\2.1.2\\sqlitepclraw.core.2.1.2.nupkg.sha512",
     "C:\\Users\\JLRiveraG\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.2\\sqlitepclraw.lib.e_sqlite3.2.1.2.nupkg.sha512",

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
 using TaskRegister.IDP.Entities;
 using TaskRegister.IDP.DbContexts;
 using TaskRegister.IDP.Services;
@@ -73,9 +72,7 @@ internal static class HostingExtensions
     }
     
     public static WebApplication ConfigurePipeline(this WebApplication app)
-    { 
-        app.UseSerilogRequestLogging();
-    
+    {
         if (app.Environment.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();

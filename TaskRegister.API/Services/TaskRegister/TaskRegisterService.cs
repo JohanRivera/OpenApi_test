@@ -1,4 +1,5 @@
-﻿using TaskRegister.API.DbContexts;
+﻿using NLog;
+using TaskRegister.API.DbContexts;
 using TaskRegister.API.Entities.Response;
 using TaskRegister.API.Entities.TaskRegister;
 
@@ -7,6 +8,7 @@ namespace TaskRegister.API.Services.TaskRegister
     public class TaskRegisterService : ITaskRegisterService
     {
         private readonly TaskRegisterContext _context;
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public TaskRegisterService(TaskRegisterContext context)
         {
@@ -44,7 +46,7 @@ namespace TaskRegister.API.Services.TaskRegister
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                _logger.Error($"TaskRegisterController.CreateTimeslip at: {DateTimeOffset.Now}, error: {ex.Message}, stackTrace: {ex.StackTrace}");
                 return ResponseCustom(false, false, "Creación fallida.");
             }
         }
@@ -78,7 +80,7 @@ namespace TaskRegister.API.Services.TaskRegister
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                _logger.Error($"TaskRegisterController.UpdateTimeslip at: {DateTimeOffset.Now}, error: {ex.Message}, stackTrace: {ex.StackTrace}");
                 return ResponseCustom(false, false, "Actualización fallida.");
             }
         }
@@ -140,17 +142,9 @@ namespace TaskRegister.API.Services.TaskRegister
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                _logger.Error($"TaskRegisterController.GetTimeslips at: {DateTimeOffset.Now}, error: {ex.Message}, stackTrace: {ex.StackTrace}");
                 return ResponseCustom(new List<ReturnTimeslipsDto>(), false, "Consulta fallida.");
             }
-        }
-
-        private static CustomResponse<List<ReturnTimeslipsDto>> ReturnQuery(IQueryable<ReturnTimeslipsDto> response)
-        {
-            if (response == null)
-                return ResponseCustom(new List<ReturnTimeslipsDto>(), true, "Consulta exitosa.");
-
-            return ResponseCustom(response.ToList(), true, "Consulta exitosa.");
         }
 
         // Eliminar timeslip
@@ -170,7 +164,7 @@ namespace TaskRegister.API.Services.TaskRegister
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                _logger.Error($"TaskRegisterController.DeleteTimeslip at: {DateTimeOffset.Now}, error: {ex.Message}, stackTrace: {ex.StackTrace}");
                 return ResponseCustom(false, false, "Eliminación fallida.");
             }
         }
@@ -185,6 +179,14 @@ namespace TaskRegister.API.Services.TaskRegister
         private async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync() > 0);
+        }
+
+        private static CustomResponse<List<ReturnTimeslipsDto>> ReturnQuery(IQueryable<ReturnTimeslipsDto> response)
+        {
+            if (response == null)
+                return ResponseCustom(new List<ReturnTimeslipsDto>(), true, "Consulta exitosa.");
+
+            return ResponseCustom(response.ToList(), true, "Consulta exitosa.");
         }
 
         #endregion

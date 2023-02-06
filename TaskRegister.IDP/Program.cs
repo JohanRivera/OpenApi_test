@@ -1,20 +1,15 @@
 ﻿using TaskRegister.IDP;
-using Serilog;
+using NLog.Web;
+using NLog;
 
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .CreateBootstrapLogger();
-
-Log.Information("Starting up");
+var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    builder.Host.UseSerilog((ctx, lc) => lc
-        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
-        .Enrich.FromLogContext()
-        .ReadFrom.Configuration(ctx.Configuration));
+    builder.Logging.ClearProviders();
+    builder.Host.UseNLog();
 
     var app = builder
         .ConfigureServices()
@@ -25,10 +20,9 @@ try
 // https://github.com/dotnet/runtime/issues/60600
 catch (Exception ex) when (ex.GetType().Name is not "StopTheHostException")
 {
-    Log.Fatal(ex, "Unhandled exception");
+    logger.Error(ex);
 }
 finally
 {
-    Log.Information("Shut down complete");
-    Log.CloseAndFlush();
+    LogManager.Shutdown();
 }

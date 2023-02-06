@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using TaskRegister.API.Entities.Projects;
 using TaskRegister.API.Services.ProjectsService;
 
@@ -12,6 +13,7 @@ namespace TaskRegister.API.Controllers.Projects
     {
         private readonly IProjectsService _projectsService;
 
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         public ProjectsController(IProjectsService projectsService)
         {
             _projectsService = projectsService ??

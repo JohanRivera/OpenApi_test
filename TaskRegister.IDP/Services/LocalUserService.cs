@@ -4,6 +4,7 @@ using TaskRegister.IDP.Entities;
 using TaskRegister.IDP.DbContexts;
 using TaskRegister.IDP.Entities.Response;
 using IdentityModel;
+using NLog;
 
 namespace TaskRegister.IDP.Services
 {
@@ -11,6 +12,7 @@ namespace TaskRegister.IDP.Services
     {
         private readonly IdentityDbContext _context;
         private readonly IPasswordHasher<User> _passwordHasher;
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public LocalUserService(
             IdentityDbContext context,
@@ -144,7 +146,7 @@ namespace TaskRegister.IDP.Services
             }
             catch(Exception ex)
             {
-                Console.Write(ex.Message);
+                _logger.Error($"UserAdministratorController.AddUser at: {DateTimeOffset.Now}, error: {ex.Message}, stackTrace: {ex.StackTrace}");
                 return ResponseCustom(false, false, "Creación de usuario fallido.");
             }
             

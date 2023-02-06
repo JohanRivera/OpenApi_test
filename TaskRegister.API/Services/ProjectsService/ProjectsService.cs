@@ -1,4 +1,5 @@
-﻿using TaskRegister.API.DbContexts;
+﻿using NLog;
+using TaskRegister.API.DbContexts;
 using TaskRegister.API.Entities.Projects;
 using TaskRegister.API.Entities.Response;
 
@@ -7,6 +8,7 @@ namespace TaskRegister.API.Services.ProjectsService
     public class ProjectsService : IProjectsService
     {
         private readonly TaskRegisterContext _context;
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public ProjectsService(TaskRegisterContext context)
         {
@@ -40,7 +42,7 @@ namespace TaskRegister.API.Services.ProjectsService
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                _logger.Error($"ProjectController.CreateProject at: {DateTimeOffset.Now}, error: {ex.Message}, stackTrace: {ex.StackTrace}");
                 return ResponseCustom(false, false, "Creación fallida.");
             }
         }
@@ -66,7 +68,7 @@ namespace TaskRegister.API.Services.ProjectsService
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                _logger.Error($"ProjectController.UpdateProject at: {DateTimeOffset.Now}, error: {ex.Message}, stackTrace: {ex.StackTrace}");
                 return ResponseCustom(false, false, "Actualización fallida.");
             }
         }
@@ -87,7 +89,7 @@ namespace TaskRegister.API.Services.ProjectsService
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                _logger.Error($"ProjectController.GetProjects at: {DateTimeOffset.Now}, error: {ex.Message}, stackTrace: {ex.StackTrace}");
                 return ResponseCustom(new List<ProjectDto>(), false, "Consulta fallida.");
             }
         }
