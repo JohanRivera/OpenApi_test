@@ -30,4 +30,6 @@ y luego
 ng serve
 ```
 
-Entonces se puede abrir localhost:4200 en el navegador.
+Entonces se puede abrir `http://localhost:4200` en el navegador.
+
+Para abrir el Swagger del `TaskRegister.API` abrir en el navegador `https://localhost:44360/swagger/index.html` y para abrir el de `TaskRegister.IDP` abrir en el navegador `https://localhost:5001/swagger/index.html`
