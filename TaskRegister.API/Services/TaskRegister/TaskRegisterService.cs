@@ -102,19 +102,17 @@ namespace TaskRegister.API.Services.TaskRegister
                                       {
                                           SubjectUserId = t.SubjectUserId,
                                           Subject = t.Subject,
-                                          AssignedDate = Convert.ToDateTime(t.AssignedDate),
+                                          AssignedDate = t.AssignedDate.ToString().Substring(0, t.AssignedDate.ToString().IndexOf(' ')),
                                           AssignedTo = t.AssignedTo,
                                           ProjectId = t.ProjectId.ToString(),
                                           ProjectName = p.Project,
                                           TaskDescription = t.TaskDescription,
-                                          Time = t.Time,
+                                          Time = t.Time / 60 < 1 ? (t.Time < 10 ? $"0h:0{t.Time}m" : $"0h:{t.Time}m")
+                                            : (t.Time % 60 < 10 ? $"{Convert.ToInt32(t.Time / 60)}h:0{Convert.ToInt32(t.Time % 60)}m" : $"{Convert.ToInt32(t.Time / 60)}h:{Convert.ToInt32(t.Time % 60)}m"),
                                           Comment = t.Comment
                                       };
 
-                    if (responseAll == null)
-                        return ResponseCustom(new List<ReturnTimeslipsDto>(), true, "Consulta exitosa.");
-
-                    return ResponseCustom(responseAll.ToList(), true, "Consulta exitosa.");
+                    return ReturnQuery(responseAll);
                 }
 
                 // Consulta de un proyecto especifico
@@ -128,25 +126,31 @@ namespace TaskRegister.API.Services.TaskRegister
                                {
                                    SubjectUserId = t.SubjectUserId.ToString(),
                                    Subject = t.Subject,
-                                   AssignedDate = Convert.ToDateTime(t.AssignedDate),
+                                   AssignedDate = t.AssignedDate.ToString().Substring(0, t.AssignedDate.ToString().IndexOf(' ')),
                                    AssignedTo = t.AssignedTo,
                                    ProjectId = t.ProjectId.ToString(),
                                    ProjectName = p.Project,
                                    TaskDescription = t.TaskDescription,
-                                   Time = t.Time,
+                                   Time = t.Time/60 < 1 ? (t.Time < 10 ? $"0h:0{t.Time}" : $"0h:{t.Time}m") 
+                                            : (t.Time % 60 < 10 ? $"{Convert.ToInt32(t.Time/60)}h:0{Convert.ToInt32(t.Time % 60)}m" : $"{Convert.ToInt32(t.Time / 60)}h:{Convert.ToInt32(t.Time % 60)}m"),
                                    Comment = t.Comment
                                };
 
-                if (response == null)
-                    return ResponseCustom(new List<ReturnTimeslipsDto>(), true, "Consulta exitosa.");
-
-                return ResponseCustom(response.ToList(), true, "Consulta exitosa.");
+                return ReturnQuery(response);
             }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
                 return ResponseCustom(new List<ReturnTimeslipsDto>(), false, "Consulta fallida.");
             }
+        }
+
+        private static CustomResponse<List<ReturnTimeslipsDto>> ReturnQuery(IQueryable<ReturnTimeslipsDto> response)
+        {
+            if (response == null)
+                return ResponseCustom(new List<ReturnTimeslipsDto>(), true, "Consulta exitosa.");
+
+            return ResponseCustom(response.ToList(), true, "Consulta exitosa.");
         }
 
         // Eliminar timeslip

@@ -21,3 +21,15 @@ export interface SearchTimeslipDto {
 export interface DeleteTimeslipDto {
     subject: string;
 }
+
+export interface TimelipsDto {
+    subject: string;
+    subjectUserId: string;
+    projectId: string;
+    projectName: string;
+    assignedTo: string;
+    taskDescription: string;
+    comment: string;
+    time: string;
+    assignedDate: string;
+}

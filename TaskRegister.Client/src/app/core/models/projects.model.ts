@@ -8,3 +8,8 @@ export interface ProjectDto {
     projectName: string;
     active: boolean;
 }
+
+export interface SelectProject {
+    id: string;
+    projectName: string;
+}

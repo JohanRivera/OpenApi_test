@@ -44,7 +44,7 @@ namespace TaskRegister.API.Controllers.TaskRegister
 
         // Obtener lista de los registros de la tarea
         [HttpPost("DeleteTimeslip")]
-        public async Task<IActionResult> DeleteTimeslip([FromForm] DeleteTimeslipDto data)
+        public async Task<IActionResult> DeleteTimeslip(DeleteTimeslipDto data)
         {
             var response = await _taskRegisterService.DeleteTimeslip(data);
             return StatusCode(response.StatusCode, response);

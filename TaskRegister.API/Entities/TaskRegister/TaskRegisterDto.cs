@@ -35,7 +35,7 @@
         public string AssignedTo { get; set; }
         public string TaskDescription { get; set; }
         public string? Comment { get; set; }
-        public int Time { get; set; }
-        public DateTime AssignedDate { get; set; }
+        public string Time { get; set; }
+        public string AssignedDate { get; set; }
     }
 }
