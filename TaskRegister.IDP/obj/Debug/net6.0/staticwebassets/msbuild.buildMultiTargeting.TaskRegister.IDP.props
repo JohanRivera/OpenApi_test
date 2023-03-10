@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\TaskRegister.IDP.props" />
-</Project>
